@@ -8,7 +8,12 @@ interface MetaProps {
   meta?: object[];
 }
 
-export default function Meta({ description, meta = [], keywords, title }: MetaProps) {
+export default function Meta({
+  description,
+  meta = [],
+  keywords,
+  title
+}: MetaProps) {
   return (
     <Helmet
       htmlAttributes={{
@@ -55,4 +60,3 @@ export default function Meta({ description, meta = [], keywords, title }: MetaPr
     />
   );
 }
-
