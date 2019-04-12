@@ -2,6 +2,7 @@ import * as React from "react";
 import { css, Global } from "@emotion/core";
 
 import Header from "./header";
+import { Link } from "gatsby";
 
 export default function Layout({ children }) {
   return (
@@ -654,7 +655,10 @@ export default function Layout({ children }) {
       >
         <main>{children}</main>
         <br />
-        <footer>© {new Date().getFullYear()} Charles Crete</footer>
+        <footer>
+          © {new Date().getFullYear()} Charles Crete &mdash;{" "}
+          <Link to="/legal">Legal</Link>
+        </footer>
       </div>
     </>
   );
