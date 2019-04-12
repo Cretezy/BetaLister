@@ -1,5 +1,5 @@
 {
-  "name": "betalister",
+  "name": "@betalister/server",
   "version": "1.0.0",
   "private": true,
   "main": "lib/index.js",
