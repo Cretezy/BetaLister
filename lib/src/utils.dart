@@ -11,19 +11,28 @@ Future<void> launchUrl(String url) async {
 }
 
 Future<Map<String, Status>> fetchPackages(List<String> packageNames) async {
-  final Map results = await CloudFunctions.instance.call(
-    functionName: 'checkPackages',
-    parameters: {
-      "packageNames": packageNames,
-    },
-  );
+  try {
+    final Map results = await CloudFunctions.instance.call(
+      functionName: 'checkPackages',
+      parameters: {
+        "packageNames": packageNames,
+      },
+    );
 
-  final appStatues = new Map<String, Status>();
+    if (results == null) {
+      throw "Results are null, malformed request?";
+    }
 
-  results.forEach((packageName, status) {
-    appStatues[packageName] =
-        status == null ? Status.error : (status ? Status.yes : Status.no);
-  });
+    final appStatues = new Map<String, Status>();
 
-  return appStatues;
+    results.forEach((packageName, status) {
+      appStatues[packageName] =
+          status == null ? Status.error : (status ? Status.yes : Status.no);
+    });
+
+    return appStatues;
+  } catch (error) {
+    print("Error fetching packages: $error");
+    return null;
+  }
 }

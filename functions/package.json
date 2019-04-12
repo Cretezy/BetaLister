@@ -1,16 +1,17 @@
 {
   "name": "betalister",
+  "version": "1.0.0",
   "private": true,
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc",
     "deploy": "firebase deploy --only functions",
+    "format": "prettier --write 'src/*' package.json tslint.json tsconfig.json",
     "lint": "tslint --project tsconfig.json",
     "logs": "firebase functions:log",
     "serve": "npm run build && firebase serve --only functions",
     "shell": "npm run build && firebase functions:shell",
-    "start": "npm run shell",
-    "format": "prettier --write 'src/*' package.json tslint.json tsconfig.json"
+    "start": "npm run shell"
   },
   "dependencies": {
     "axios": "^0.18.0",

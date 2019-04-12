@@ -1,12 +1,21 @@
 import 'package:beta_lister/src/utils.dart';
-import 'package:cloud_functions/cloud_functions.dart';
 import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
 
 enum Status { error, no, yes }
-enum Action { reload }
+enum Action { reload, support, review }
 
-const actionLabels = <Action, String>{Action.reload: "Reload"};
+const actionLabels = <Action, String>{
+  Action.reload: "Reload",
+  Action.support: "Email support",
+  Action.review: "Leave review",
+};
+
+const actionIcons = <Action, IconData>{
+  Action.reload: Icons.refresh,
+  Action.support: Icons.email,
+  Action.review: Icons.star,
+};
 
 void main() => runApp(App());
 
@@ -17,8 +26,9 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   List<Application> _apps;
-  var _appStatues = new Map<String, Status>();
+  Map<String, Status> _appStatues;
   var _loading = true;
+  var _error = false;
 
   @override
   void initState() {
@@ -29,7 +39,9 @@ class _AppState extends State<App> {
 
   Future<void> _fetchApps() async {
     setState(() {
-      this._loading = true;
+      _loading = true;
+      _error = false;
+      _appStatues = null;
     });
 
     // Get system apps
@@ -39,25 +51,34 @@ class _AppState extends State<App> {
       includeAppIcons: true,
     );
 
+    apps.sort((app1, app2) {
+      return app1.appName.compareTo(app2.appName);
+    });
+
     setState(() {
-      this._apps = apps;
+      _apps = apps;
     });
 
     final appStatues =
         await fetchPackages(apps.map((app) => app.packageName).toList());
 
     setState(() {
-      this._appStatues = appStatues;
+      _appStatues = appStatues;
       _loading = false;
+      _error = appStatues == null;
 
       // Sort app by beta -> error -> no beta
-      apps.sort((app1, app2) {
-        final app1Info = appStatues[app1.packageName];
-        final app2Info = appStatues[app2.packageName];
-        return app1Info == Status.yes && app2Info == Status.no
-            ? -1
-            : app1Info == app2Info ? 0 : app1Info == Status.yes ? -1 : 1;
-      });
+      if (appStatues != null) {
+        _apps.sort((app1, app2) {
+          final app1Info = appStatues[app1.packageName];
+          final app2Info = appStatues[app2.packageName];
+          return app1Info == Status.yes && app2Info == Status.no
+              ? -1
+              : app1Info == app2Info
+                  ? (app1.appName.compareTo(app2.appName))
+                  : app1Info == Status.yes ? -1 : 1;
+        });
+      }
     });
   }
 
@@ -74,8 +95,11 @@ class _AppState extends State<App> {
           : Icon(Icons.not_interested),
       title: Text(app.appName),
       subtitle: Text("${app.packageName} (${app.versionName})"),
-      trailing: _buildTrailing(_appStatues[app.packageName]),
-      onTap: _appStatues[app.packageName] == Status.yes ? onTap : null,
+      trailing: _buildTrailing(
+          _appStatues != null ? _appStatues[app.packageName] : null),
+      onTap: _appStatues != null && _appStatues[app.packageName] == Status.yes
+          ? onTap
+          : null,
       onLongPress: onTap,
     );
   }
@@ -98,16 +122,28 @@ class _AppState extends State<App> {
       case Action.reload:
         _fetchApps();
         break;
+      case Action.support:
+        launchUrl("mailto:support@betalister.app");
+        break;
+      case Action.review:
+        launchUrl(
+          "https://play.google.com/store/apps/details?id=app.betalister",
+        );
+        break;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final actions = <Action>[Action.reload]
+    final actions = <Action>[Action.reload, Action.support, Action.review]
         .map<PopupMenuItem<Action>>(
-          (Action action) => PopupMenuItem<Action>(
+          (action) => PopupMenuItem<Action>(
                 value: action,
-                child: Text(actionLabels[action]),
+                child: ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  leading: Icon(actionIcons[action]),
+                  title: Text(actionLabels[action]),
+                ),
               ),
         )
         .toList();
@@ -125,20 +161,25 @@ class _AppState extends State<App> {
 
     final firstTile = ListTile(
       leading: Padding(
-        padding: const EdgeInsets.only(left: 4),
+        padding: const EdgeInsets.only(left: 4, top: 4),
         child: SizedBox(
           width: 24,
           height: 24,
           child: Center(
             child: _loading
                 ? CircularProgressIndicator(strokeWidth: 3)
-                : Icon(Icons.cloud_done),
+                : _error ? Icon(Icons.error) : Icon(Icons.cloud_done),
           ),
         ),
       ),
       title: Text(
-        _loading ? "Fetching app beta statues..." : "App beta statues loaded!",
+        _loading
+            ? "Fetching app beta statues..."
+            : _error
+                ? "An error occured while fetching statues!"
+                : "App beta statues loaded!",
       ),
+      subtitle: Text("Tap an app to view it's beta page"),
     );
 
     return MaterialApp(
