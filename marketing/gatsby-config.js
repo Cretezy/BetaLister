@@ -18,8 +18,8 @@ module.exports = {
         name: "Beta Lister",
         short_name: "starter",
         start_url: "/",
-        background_color: "#663399",
-        theme_color: "#663399",
+        background_color: "#F44336",
+        theme_color: "#F44336",
         display: "minimal-ui",
         icon: "src/images/icon.png"
       }

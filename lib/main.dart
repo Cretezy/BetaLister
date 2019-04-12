@@ -3,18 +3,25 @@ import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
 
 enum Status { error, no, yes }
-enum Action { reload, support, review }
+enum Action {
+  reload,
+  support,
+  review,
+  website,
+}
 
 const actionLabels = <Action, String>{
   Action.reload: "Reload",
   Action.support: "Email support",
   Action.review: "Leave review",
+  Action.website: "View website",
 };
 
 const actionIcons = <Action, IconData>{
   Action.reload: Icons.refresh,
   Action.support: Icons.email,
   Action.review: Icons.star,
+  Action.website: Icons.web,
 };
 
 void main() => runApp(App());
@@ -130,23 +137,29 @@ class _AppState extends State<App> {
           "https://play.google.com/store/apps/details?id=app.betalister",
         );
         break;
+      case Action.website:
+        launchUrl(
+          "https://betalister.app",
+        );
+        break;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final actions = <Action>[Action.reload, Action.support, Action.review]
-        .map<PopupMenuItem<Action>>(
-          (action) => PopupMenuItem<Action>(
-                value: action,
-                child: ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  leading: Icon(actionIcons[action]),
-                  title: Text(actionLabels[action]),
-                ),
-              ),
-        )
-        .toList();
+    final actions =
+        <Action>[Action.reload, Action.support, Action.review, Action.website]
+            .map<PopupMenuItem<Action>>(
+              (action) => PopupMenuItem<Action>(
+                    value: action,
+                    child: ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: Icon(actionIcons[action]),
+                      title: Text(actionLabels[action]),
+                    ),
+                  ),
+            )
+            .toList();
 
     final appBar = AppBar(
       title: Text("Beta Lister"),
