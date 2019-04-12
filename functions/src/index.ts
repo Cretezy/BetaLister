@@ -83,9 +83,9 @@ async function getPackageStatus(
 ): Promise<PackageStatus | null> {
   try {
     if (!entities && !entitiesPromise) {
-      entitiesPromise = async () => {
+      entitiesPromise = (async () => {
         entities = await import("entities");
-      };
+      })();
     }
 
     const results = await client.get(packageName);
