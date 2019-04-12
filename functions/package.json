@@ -1,0 +1,29 @@
+{
+  "name": "betalister",
+  "private": true,
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "tsc",
+    "deploy": "firebase deploy --only functions",
+    "lint": "tslint --project tsconfig.json",
+    "logs": "firebase functions:log",
+    "serve": "npm run build && firebase serve --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "format": "prettier --write 'src/*' package.json tslint.json tsconfig.json"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "dotenv": "^7.0.0",
+    "firebase-admin": "^7.2.0",
+    "firebase-functions": "^2.2.1"
+  },
+  "devDependencies": {
+    "prettier": "^1.16.4",
+    "tslint": "^5.15.0",
+    "typescript": "^3.4.3"
+  },
+  "engines": {
+    "node": "8"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "142207457624",
+    "firebase_url": "https://betalister-app.firebaseio.com",
+    "project_id": "betalister-app",
+    "storage_bucket": "betalister-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:142207457624:android:da231a076bed6097",
+        "android_client_info": {
+          "package_name": "app.betalister"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "142207457624-v2ji9ba0ntvakgtrvilc1lmqea9qqr3g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_GJBEPiF9YwW_7PcVFhJqOxuHpAXhYqc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "142207457624-v2ji9ba0ntvakgtrvilc1lmqea9qqr3g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

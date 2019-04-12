@@ -1,0 +1,16 @@
+name: beta_lister
+description: List available beta apps on Android.
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  device_apps: ^1.0.7
+  url_launcher: ^5.0.2
+  cloud_functions: ^0.1.2+1
+
+flutter:
+  uses-material-design: true
