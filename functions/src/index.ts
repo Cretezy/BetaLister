@@ -5,6 +5,9 @@ import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 import axios from "axios";
 
+let entities;
+let entitiesPromise;
+
 admin.initializeApp();
 
 const client = axios.create({
@@ -42,14 +45,17 @@ export const checkPackages = functions.https.onCall(
       const packageInfo = await packageRef.get();
 
       if (!packageInfo.exists) {
-        const beta = await getPackageStatus(packageName);
+        const data = await getPackageStatus(packageName);
 
-        if (beta !== null) {
-          await packageRef.set({ beta });
-          packagesCache[packageName] = beta;
+        if (data === null) {
+          response[packageName] = null;
+          return;
         }
 
-        response[packageName] = beta;
+        await packageRef.set(data);
+
+        packagesCache[packageName] = data.beta;
+        response[packageName] = data.beta;
       } else {
         const { beta } = packageInfo.data();
 
@@ -65,11 +71,39 @@ export const checkPackages = functions.https.onCall(
   }
 );
 
-async function getPackageStatus(packageName: string): Promise<boolean | null> {
-  try {
-    const results = await client.get(packageName);
+interface PackageStatus {
+  beta: boolean;
+  name: string;
+  owner: string;
+  icon: string;
+}
 
-    return !results.data.includes("App not available");
+async function getPackageStatus(
+  packageName: string
+): Promise<PackageStatus | null> {
+  try {
+    if (!entities && !entitiesPromise) {
+      entitiesPromise = async () => {
+        entities = await import("entities");
+      };
+    }
+
+    const results = await client.get(packageName);
+    await entitiesPromise;
+
+    const beta = !results.data.includes("App not available");
+    const name = beta
+      ? entities.decodeHTML(results.data.match(/>App: (.*?)</)[1])
+      : null;
+    const owner = beta
+      ? entities.decodeHTML(results.data.match(/>Owner: (.*?)</)[1])
+      : null;
+
+    const icon = beta
+      ? results.data.match(/img class="icon" src="(.*?)"/)[1]
+      : null;
+
+    return { beta, name, owner, icon };
   } catch (error) {
     console.error(`Error check status: for ${packageName}`, error);
 
