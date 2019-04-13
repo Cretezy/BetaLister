@@ -2,8 +2,8 @@
   "name": "@betalister/utils",
   "version": "1.0.0",
   "scripts": {
-    "translations": "ts-node src/translations.ts",
-    "format": "prettier --write 'src/**/*.ts' package.json tsconfig.json"
+    "format": "prettier --write 'src/**/*.ts' package.json tsconfig.json",
+    "translations": "ts-node src/translations.ts"
   },
   "dependencies": {
     "axios": "^0.18.0",

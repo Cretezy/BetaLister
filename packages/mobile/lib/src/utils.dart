@@ -1,4 +1,4 @@
-import 'package:beta_lister/main.dart';
+import 'package:beta_lister/src/home.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -10,7 +10,7 @@ Future<void> launchUrl(String url) async {
   }
 }
 
-Future<Map<String, Status>> fetchPackages(List<String> packageNames) async {
+Future<Map<String, AppStatus>> fetchPackages(List<String> packageNames) async {
   try {
     final Map results = await CloudFunctions.instance.call(
       functionName: 'checkPackages',
@@ -23,11 +23,12 @@ Future<Map<String, Status>> fetchPackages(List<String> packageNames) async {
       throw "Results are null, malformed request?";
     }
 
-    final appStatues = new Map<String, Status>();
+    final appStatues = new Map<String, AppStatus>();
 
     results.forEach((packageName, status) {
-      appStatues[packageName] =
-          status == null ? Status.error : (status ? Status.yes : Status.no);
+      appStatues[packageName] = status == null
+          ? AppStatus.error
+          : (status ? AppStatus.yes : AppStatus.no);
     });
 
     return appStatues;

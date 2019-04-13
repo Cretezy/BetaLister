@@ -3,9 +3,10 @@ import axios from "axios";
 import * as R from "ramda";
 import * as querystring from "querystring";
 import * as fs from "fs-extra";
+import * as path from "path";
 
+// Utils
 const getResults = x => R.path(["result", x]);
-
 const unflattenObj = R.pipe(
   R.toPairs,
   R.reduce((acc, value) => {
@@ -14,13 +15,24 @@ const unflattenObj = R.pipe(
   }, {})
 );
 
+const options = {
+  api_token: process.env.POEDITOR_API_KEY,
+  id: process.env.POEDITOR_PROJECT_ID
+};
+
+const translationsPath = "../mobile/assets/i18n";
+
 async function main() {
-  const options = {
-    api_token: process.env.POEDITOR_API_KEY,
-    id: process.env.POEDITOR_PROJECT_ID
-  };
+  // Reset translations directory
+  await fs.remove(translationsPath);
+  await fs.ensureDir(translationsPath);
+  await fs.writeFile(
+    path.join(translationsPath, "README"),
+    "Do not manually edit these files, they are automatically generated from POEditor."
+  );
 
   console.log("Fetching languages...");
+
   const { data: languagesResults } = await axios.post(
     " https://api.poeditor.com/v2/languages/list",
     querystring.stringify(options)
@@ -50,9 +62,12 @@ async function main() {
       R.fromPairs
     )(termsResults);
 
-    await fs.writeJson(`../mobile/assets/i18n/${language}.json`, unflattenObj(terms));
+    await fs.writeJson(
+      path.join(translationsPath, `${language}.json`),
+      unflattenObj(terms)
+    );
 
-
+    console.log("Saved terms for language", language);
   })(languages);
 
   await Promise.all(termsPromises);
