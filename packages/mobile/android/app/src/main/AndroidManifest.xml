@@ -12,7 +12,7 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="beta_lister"
+        android:label="Beta Lister"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
