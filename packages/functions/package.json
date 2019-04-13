@@ -2,11 +2,11 @@
   "name": "@betalister/server",
   "version": "1.0.0",
   "private": true,
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "deploy": "firebase deploy --only functions",
-    "format": "prettier --write 'src/*' package.json tslint.json tsconfig.json",
+    "format": "prettier --write 'src/**/*.ts' package.json tslint.json tsconfig.json",
     "lint": "tslint --project tsconfig.json",
     "logs": "firebase functions:log",
     "serve": "npm run build && firebase serve --only functions",

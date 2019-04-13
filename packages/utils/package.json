@@ -1,0 +1,20 @@
+{
+  "name": "@betalister/utils",
+  "version": "1.0.0",
+  "scripts": {
+    "translations": "ts-node src/translations.ts",
+    "format": "prettier --write 'src/**/*.ts' package.json tsconfig.json"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "dotenv": "^7.0.0",
+    "fs-extra": "^7.0.1",
+    "ramda": "~0.26.1",
+    "ts-node": "^8.0.3",
+    "typescript": "^3.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^11.13.4",
+    "prettier": "^1.17.0"
+  }
+}
