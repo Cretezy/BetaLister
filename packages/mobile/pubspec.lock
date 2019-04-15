@@ -110,7 +110,7 @@ packages:
       name: intl
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.15.8"
+    version: "0.15.7"
   intro_views_flutter:
     dependency: "direct main"
     description:
@@ -138,7 +138,7 @@ packages:
       name: petitparser
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.1"
+    version: "2.1.1"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -199,7 +199,7 @@ packages:
       name: xml
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.4.1"
+    version: "3.3.1"
   yaml:
     dependency: transitive
     description:
@@ -208,5 +208,5 @@ packages:
     source: hosted
     version: "2.1.15"
 sdks:
-  dart: ">=2.2.0 <3.0.0"
+  dart: ">=2.1.0 <3.0.0"
   flutter: ">=0.5.6 <2.0.0"
