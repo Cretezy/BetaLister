@@ -2,6 +2,7 @@ import * as React from "react";
 
 import Layout from "../components/layout";
 import Meta from "../components/meta";
+import { OutboundLink } from "gatsby-plugin-google-analytics";
 
 export default function Legal() {
   return (
@@ -181,21 +182,21 @@ export default function Legal() {
             You may opt-out of certain Firebase features through your mobile
             device settings, such as your device advertising settings or by
             following the instructions provided by Google in their{" "}
-            <a href="https://policies.google.com/privacy?hl=en">
+            <OutboundLink href="https://policies.google.com/privacy?hl=en">
               Privacy Policy
-            </a>
+            </OutboundLink>
             .
           </p>
           <p>
             We also encourage you to review the{" "}
-            <a href="https://support.google.com/analytics/answer/6004245">
+            <OutboundLink href="https://support.google.com/analytics/answer/6004245">
               Google's policy
-            </a>{" "}
+            </OutboundLink>{" "}
             for safeguarding your data. For more information on what type of
             information Firebase collects, please visit please visit the{" "}
-            <a href="https://policies.google.com/privacy?hl=en">
+            <OutboundLink href="https://policies.google.com/privacy?hl=en">
               Google Privacy & Terms
-            </a>{" "}
+            </OutboundLink>{" "}
             web page.
           </p>
         </li>
@@ -249,7 +250,9 @@ export default function Legal() {
       <ul>
         <li>
           By email:{" "}
-          <a href="mailto:support@betalister.app">support@betalister.app</a>
+          <OutboundLink href="mailto:support@betalister.app">
+            support@betalister.app
+          </OutboundLink>
         </li>
       </ul>
     </Layout>
