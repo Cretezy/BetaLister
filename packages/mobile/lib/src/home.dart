@@ -1,3 +1,4 @@
+import 'package:beta_lister/src/analytics.dart';
 import 'package:beta_lister/src/appTile.dart';
 import 'package:beta_lister/src/onboarding.dart';
 import 'package:beta_lister/src/utils.dart';
@@ -57,6 +58,8 @@ class _HomeState extends State<Home> {
   }
 
   Future<void> _fetchApps() async {
+    analytics.logEvent(name: "load_betas");
+
     setState(() {
       _status = LoadingStatus.loading;
       _appStatues = null;
@@ -104,20 +107,25 @@ class _HomeState extends State<Home> {
   void _onAction(MenuAction action) {
     switch (action) {
       case MenuAction.refresh:
+        analytics.logEvent(name: "click_refresh");
         _fetchApps();
         break;
       case MenuAction.support:
+        analytics.logEvent(name: "click_support");
         launchUrl("mailto:support@betalister.app");
         break;
       case MenuAction.review:
+        analytics.logEvent(name: "click_review");
         launchUrl(
           "https://play.google.com/store/apps/details?id=app.betalister",
         );
         break;
       case MenuAction.website:
+        analytics.logEvent(name: "click_website");
         launchUrl("https://betalister.app");
         break;
       case MenuAction.onboarding:
+        analytics.logEvent(name: "click_onboarding");
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(

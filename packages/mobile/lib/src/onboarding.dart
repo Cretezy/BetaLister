@@ -1,3 +1,4 @@
+import 'package:beta_lister/src/analytics.dart';
 import 'package:beta_lister/src/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
@@ -14,6 +15,12 @@ const titleStyle = TextStyle(fontSize: 30);
 const bodyStyle = TextStyle(fontSize: 18);
 
 class _OnboardingState extends State<Onboarding> {
+  @override
+  void initState() {
+    super.initState();
+    analytics.logTutorialBegin();
+  }
+
   @override
   Widget build(BuildContext context) {
     final pages = <PageViewModel>[
@@ -46,6 +53,8 @@ class _OnboardingState extends State<Onboarding> {
     return IntroViewsFlutter(
       pages,
       onTapDoneButton: () {
+        analytics.logTutorialComplete();
+
         SharedPreferences.getInstance()
             .then((prefs) => prefs.setBool("doneOnboarding", true));
 

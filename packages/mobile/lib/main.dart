@@ -1,3 +1,4 @@
+import 'package:beta_lister/src/analytics.dart';
 import 'package:beta_lister/src/home.dart';
 import 'package:beta_lister/src/onboarding.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future main() async {
+  analytics.logAppOpen();
+
   final prefs = await SharedPreferences.getInstance();
   final doneOnboarding = prefs.getBool("doneOnboarding") ?? false;
 
