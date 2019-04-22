@@ -49,6 +49,8 @@ class _HomeState extends State<Home> {
   List<Application> _apps;
   Map<String, AppStatus> _appStatues;
   var _status = LoadingStatus.loading;
+  var _search = "";
+  var _searching = false;
 
   @override
   void initState() {
@@ -160,6 +162,51 @@ class _HomeState extends State<Home> {
     );
   }
 
+  Widget _buildSearchField() {
+    return TextField(
+      style: Theme.of(context).textTheme.title.copyWith(
+            color: Colors.white,
+            fontWeight: FontWeight.normal,
+          ),
+      autocorrect: false,
+      onChanged: (value) {
+        setState(() {
+          _search = value;
+        });
+      },
+      decoration: InputDecoration(
+        hintText: MaterialLocalizations.of(context).searchFieldLabel + "...",
+        hintStyle: Theme.of(context).textTheme.title.copyWith(
+              color: Colors.white70,
+            ),
+        border: InputBorder.none,
+      ),
+    );
+  }
+
+  Widget _buildSearchButton() {
+    return _searching
+        ? IconButton(
+            tooltip: MaterialLocalizations.of(context).closeButtonTooltip,
+            icon: Icon(Icons.close),
+            onPressed: () {
+              setState(() {
+                _searching = false;
+                _search = "";
+              });
+            },
+          )
+        : IconButton(
+            tooltip: MaterialLocalizations.of(context).searchFieldLabel,
+            icon: Icon(Icons.search),
+            onPressed: () {
+              setState(() {
+                _searching = true;
+              });
+            },
+          );
+  }
+
   @override
   Widget build(BuildContext context) {
     final actions = MenuAction.values
@@ -177,8 +224,9 @@ class _HomeState extends State<Home> {
         .toList();
 
     final appBar = AppBar(
-      title: Text("Beta Lister"),
+      title: !_searching ? Text("Beta Lister") : _buildSearchField(),
       actions: <Widget>[
+        _buildSearchButton(),
         PopupMenuButton<MenuAction>(
           icon: Icon(Icons.more_horiz),
           onSelected: _onAction,
@@ -201,10 +249,27 @@ class _HomeState extends State<Home> {
               }
 
               final app = _apps[index - 1];
+
+              if (_searching) {
+                final search = _search.toLowerCase().replaceAll(" ", "");
+                final appName = app.appName.toLowerCase().replaceAll(" ", "");
+                final packageName =
+                    app.packageName.toLowerCase().replaceAll(" ", "");
+
+                if (!appName.contains(search) &&
+                    !packageName.contains(search)) {
+                  return Container();
+                }
+              }
+
               final appStatus =
                   _appStatues != null ? _appStatues[app.packageName] : null;
 
-              return AppTile(app: app, status: appStatus);
+              return AppTile(
+                key: Key(app.packageName),
+                app: app,
+                status: appStatus,
+              );
             },
           ),
         ),

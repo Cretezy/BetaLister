@@ -11,7 +11,7 @@ const appStatusLabel = <AppStatus, String>{
   null: "status.fetching"
 };
 
-class AppTile extends StatelessWidget {
+class AppTile extends StatefulWidget {
   final AppStatus status;
   final Application app;
 
@@ -21,6 +21,11 @@ class AppTile extends StatelessWidget {
     this.status,
   }) : super(key: key);
 
+  @override
+  _AppTileState createState() => _AppTileState();
+}
+
+class _AppTileState extends State<AppTile> {
   Widget _buildAppStatusIcon(AppStatus status) {
     switch (status) {
       case AppStatus.error:
@@ -34,13 +39,20 @@ class AppTile extends StatelessWidget {
     }
   }
 
+  // Cache to avoid flicker
+  Widget _icon;
+
   Widget _buildAppIcon(Application app) {
-    return app is ApplicationWithIcon
-        ? Image.memory(
-            app.icon,
-            width: 32,
-          )
-        : Icon(Icons.error);
+    if (_icon == null) {
+      _icon = app is ApplicationWithIcon
+          ? Image.memory(
+              app.icon,
+              width: 32,
+            )
+          : Icon(Icons.error);
+    }
+
+    return _icon;
   }
 
   void _showAppSheet(BuildContext context, Application app) {
@@ -62,9 +74,10 @@ class AppTile extends StatelessWidget {
           ),
           ListTile(
             leading: _buildAppStatusIcon(
-              status,
+              widget.status,
             ),
-            title: Text(FlutterI18n.translate(context, appStatusLabel[status])),
+            title: Text(
+                FlutterI18n.translate(context, appStatusLabel[widget.status])),
             subtitle: Text(FlutterI18n.translate(context, "viewBetaPage")),
             onTap: () => launchUrl(
                 "https://play.google.com/apps/testing/${app.packageName}"),
@@ -81,26 +94,26 @@ class AppTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final beta = status == AppStatus.yes;
+    final beta = widget.status == AppStatus.yes;
 
-    final leading = _buildAppIcon(app);
+    final leading = _buildAppIcon(widget.app);
 
     return ListTile(
       leading: leading,
       title: Text(
-        app.appName,
+        widget.app.appName,
         style: TextStyle(
           fontWeight: beta ? FontWeight.w500 : FontWeight.normal,
         ),
       ),
       trailing: _buildAppStatusIcon(
-        status,
+        widget.status,
       ),
       onTap: beta
           ? () => launchUrl(
-              "https://play.google.com/apps/testing/${app.packageName}")
+              "https://play.google.com/apps/testing/${widget.app.packageName}")
           : null,
-      onLongPress: () => _showAppSheet(context, app),
+      onLongPress: () => _showAppSheet(context, widget.app),
     );
   }
 }
