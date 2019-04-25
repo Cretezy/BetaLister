@@ -169,6 +169,7 @@ class _HomeState extends State<Home> {
             fontWeight: FontWeight.normal,
           ),
       autocorrect: false,
+      autofocus: true,
       onChanged: (value) {
         setState(() {
           _search = value;
