@@ -41,6 +41,11 @@ export default function Index() {
         <li> Links directly to beta enrollment page</li>
       </ul>
 
+      <p>
+        Have an app that crashes? Maybe it's beta fixes it! <br />
+        Have an app you want to help out? Beta test for the developers!
+      </p>
+
       <div
         css={css`
           display: flex;
