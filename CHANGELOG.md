@@ -1,4 +1,8 @@
-# v0.2.0 (3): 2019-04-22 (unreleased)
+# v0.2.1 (4): 2019-04-27
+
+- Added autofocus to search
+
+# v0.2.0 (3): 2019-04-22
 
 - Added search
 
