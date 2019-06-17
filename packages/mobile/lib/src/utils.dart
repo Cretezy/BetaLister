@@ -10,22 +10,23 @@ Future<void> launchUrl(String url) async {
   }
 }
 
+final function = CloudFunctions.instance.getHttpsCallable(
+  functionName: 'checkPackages',
+);
+
 Future<Map<String, AppStatus>> fetchPackages(List<String> packageNames) async {
   try {
-    final Map results = await CloudFunctions.instance.call(
-      functionName: 'checkPackages',
-      parameters: {
-        "packageNames": packageNames,
-      },
-    );
+    final HttpsCallableResult results = await function.call({
+      "packageNames": packageNames,
+    });
 
-    if (results == null) {
+    if (results.data == null) {
       throw "Results are null, malformed request?";
     }
 
     final appStatues = new Map<String, AppStatus>();
 
-    results.forEach((packageName, status) {
+    (results.data as Map).forEach((packageName, status) {
       appStatues[packageName] = status == null
           ? AppStatus.error
           : (status ? AppStatus.yes : AppStatus.no);
