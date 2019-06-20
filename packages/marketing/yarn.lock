@@ -4194,10 +4194,10 @@ functional-red-black-tree@^1.0.1:
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
   integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
 
-gatsby-cli@^2.6.5:
-  version "2.6.5"
-  resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-2.6.5.tgz#54d812a7a9bfa39c48eaca1864d6bb56f4fde8c6"
-  integrity sha512-M0M6OoZ3ZVT6dYHP1I0scJBJzQlTbeElgO7C08acc68Qj9BD0LbSnt38kyJ60j1oceCndnGgNsLP6lg3iR87/A==
+gatsby-cli@^2.6.13:
+  version "2.6.13"
+  resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-2.6.13.tgz#03194f7a67064e47535ab7c37286a993548cefec"
+  integrity sha512-jYyInlZ8Qup3wbUcuMxqjRFrgsr5VmlxTFS4RwvZylkNZ9+9t+pM8kMR2rv5wrzS5KUQaN+OV0R/jwIp+a+paw==
   dependencies:
     "@babel/code-frame" "^7.0.0"
     "@babel/runtime" "^7.0.0"
@@ -4213,15 +4213,16 @@ gatsby-cli@^2.6.5:
     execa "^0.8.0"
     fs-exists-cached "^1.0.0"
     fs-extra "^4.0.1"
-    gatsby-telemetry "^1.0.11"
+    gatsby-telemetry "^1.0.12"
     hosted-git-info "^2.6.0"
     is-valid-path "^0.1.1"
     lodash "^4.17.10"
     meant "^1.0.1"
-    node-fetch "2.3.0"
+    node-fetch "^2.6.0"
     object.entries "^1.1.0"
     opentracing "^0.14.3"
     pretty-error "^2.1.1"
+    progress "^2.0.3"
     prompts "^2.1.0"
     react "^16.8.4"
     resolve-cwd "^2.0.0"
@@ -4325,10 +4326,10 @@ gatsby-react-router-scroll@^2.0.7:
     scroll-behavior "^0.9.9"
     warning "^3.0.0"
 
-gatsby-telemetry@^1.0.11:
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/gatsby-telemetry/-/gatsby-telemetry-1.0.11.tgz#18b7fd03080db189f63265637cee333d2b811af8"
-  integrity sha512-pEGt8lpjB52KF2ekdL7TvARTpE+iHzx31f8ILS7r7ZqgCp2v+MhaLGIDh4SiCM801mFYGgsp87mx4q8DCqPeDQ==
+gatsby-telemetry@^1.0.12:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/gatsby-telemetry/-/gatsby-telemetry-1.0.12.tgz#37b2294835b3807c36d77e26200685085577a4dd"
+  integrity sha512-TDzcwhbwnHU0PqiCP751qBLyFfSbRbduCKCCsdbBOnsVYMO3L/YUQ4RWe/FUh3xNXmTLPCfoCejtmnZn7d7MnA==
   dependencies:
     "@babel/code-frame" "^7.0.0"
     "@babel/runtime" "^7.0.0"
@@ -4339,6 +4340,7 @@ gatsby-telemetry@^1.0.11:
     envinfo "^5.8.1"
     fs-extra "^7.0.1"
     is-docker "1.1.0"
+    lodash "^4.17.10"
     node-fetch "2.3.0"
     resolve-cwd "^2.0.0"
     source-map "^0.5.7"
@@ -4346,10 +4348,10 @@ gatsby-telemetry@^1.0.11:
     stack-utils "1.0.2"
     uuid "3.3.2"
 
-gatsby@^2.9.0:
-  version "2.9.0"
-  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.9.0.tgz#9ced22c19af8b453b22b9e63c0492463e81dab32"
-  integrity sha512-kloFMDAhZyGdoTYpA/hJ7U3aABujN31Ck2W4YeYKzA2089+GzlpaeSdsrm2fYDdMXxyILN02VmeQ1zaBhLg/UA==
+gatsby@^2.9.11:
+  version "2.9.11"
+  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.9.11.tgz#b5519f1c454d6d12a76211f66a7a77cb11d4c304"
+  integrity sha512-9Dkn4y0P7RIYtTUQSl9+L96R3sonHlaj+RbCxCrrtdH+EWABja2iTPO+qKZWTELFaQkvr+Z3Kfsxed+aRpzmLQ==
   dependencies:
     "@babel/code-frame" "^7.0.0"
     "@babel/core" "^7.0.0"
@@ -4407,12 +4409,12 @@ gatsby@^2.9.0:
     flat "^4.0.0"
     fs-exists-cached "1.0.0"
     fs-extra "^5.0.0"
-    gatsby-cli "^2.6.5"
+    gatsby-cli "^2.6.13"
     gatsby-graphiql-explorer "^0.1.2"
     gatsby-link "^2.1.1"
     gatsby-plugin-page-creator "^2.0.13"
     gatsby-react-router-scroll "^2.0.7"
-    gatsby-telemetry "^1.0.11"
+    gatsby-telemetry "^1.0.12"
     glob "^7.1.1"
     got "8.0.0"
     graphql "^14.1.1"
@@ -6454,6 +6456,11 @@ node-fetch@^1.0.1:
     encoding "^0.1.11"
     is-stream "^1.0.1"
 
+node-fetch@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.0.tgz#e633456386d4aa55863f676a7ab0daa8fdecb0fd"
+  integrity sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA==
+
 node-forge@0.7.5:
   version "0.7.5"
   resolved "https://registry.yarnpkg.com/node-forge/-/node-forge-0.7.5.tgz#6c152c345ce11c52f465c2abd957e8639cd674df"
@@ -7574,7 +7581,7 @@ process@~0.5.1:
   resolved "https://registry.yarnpkg.com/process/-/process-0.5.2.tgz#1638d8a8e34c2f440a91db95ab9aeb677fc185cf"
   integrity sha1-FjjYqONML0QKkduVq5rrZ3/Bhc8=
 
-progress@^2.0.0:
+progress@^2.0.0, progress@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/progress/-/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"
   integrity sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==
