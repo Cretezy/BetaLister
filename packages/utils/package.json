@@ -6,7 +6,7 @@
     "translations": "ts-node src/translations.ts"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "dotenv": "^7.0.0",
     "fs-extra": "^7.0.1",
     "ramda": "~0.26.1",
