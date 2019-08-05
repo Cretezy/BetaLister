@@ -10,7 +10,7 @@
     "start": "npm run develop"
   },
   "dependencies": {
-    "@emotion/core": "^10.0.14",
+    "@emotion/core": "^10.0.15",
     "gatsby": "^2.13.32",
     "gatsby-image": "^2.2.4",
     "gatsby-plugin-emotion": "^4.1.0",
