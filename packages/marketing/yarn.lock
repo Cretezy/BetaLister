@@ -565,7 +565,7 @@
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/plugin-syntax-jsx" "^7.2.0"
 
-"@babel/plugin-transform-react-jsx@^7.0.0", "@babel/plugin-transform-react-jsx@^7.1.6":
+"@babel/plugin-transform-react-jsx@^7.0.0", "@babel/plugin-transform-react-jsx@^7.3.0":
   version "7.3.0"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-jsx/-/plugin-transform-react-jsx-7.3.0.tgz#f2cab99026631c767e2745a5368b331cfe8f5290"
   integrity sha512-a/+aRb7R06WcKvQLOu4/TpjKOdvVEKRLWFpKcNuHhiREPgGRB4TQJxq07+EZLS8LFVYpfq1a5lDUnuMdcCpBKg==
@@ -733,10 +733,10 @@
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/plugin-transform-typescript" "^7.3.2"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.4.2", "@babel/runtime@^7.4.3", "@babel/runtime@^7.4.5":
-  version "7.5.4"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.5.4.tgz#cb7d1ad7c6d65676e66b47186577930465b5271b"
-  integrity sha512-Na84uwyImZZc3FKf4aUF1tysApzwf3p2yuFBIyBfbzT5glzKTdvYI4KVW4kcgjrzoGUjC7w3YyCHcJKaRxsr2Q==
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.4.2", "@babel/runtime@^7.4.3", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.0":
+  version "7.6.0"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.6.0.tgz#4fc1d642a9fd0299754e8b5de62c631cf5568205"
+  integrity sha512-89eSBLJsxNxOERC0Op4vd+0Bqm6wRMqMbFtV3i0/fbaWw/mJ8Q3eBvgX0G4SyrOOLCtbu98HspF8o09MRT+KzQ==
   dependencies:
     regenerator-runtime "^0.13.2"
 
@@ -773,22 +773,22 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@emotion/babel-plugin-jsx-pragmatic@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@emotion/babel-plugin-jsx-pragmatic/-/babel-plugin-jsx-pragmatic-0.1.2.tgz#bb98bbef8effe83418307563c34e784deae57a1a"
-  integrity sha512-BapTL0I1flAB+qrfOmltOdLORBtz8dvtKjcHZmYYWdiGsn+2bZxaZDra+S0jDLd1tnhvPvhHoGv3140WR8PAow==
+"@emotion/babel-plugin-jsx-pragmatic@^0.1.3":
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@emotion/babel-plugin-jsx-pragmatic/-/babel-plugin-jsx-pragmatic-0.1.3.tgz#e06489b00bda80304e7198be76f448dd267df397"
+  integrity sha512-zbxpcKoAX9IMRfJqT2EnYL29AGlJyn+1VPoZW73BJslRDJbzgo2RYJIxR3Hg48kifv/TduIkpMH3L3wU/7yP8g==
   dependencies:
     "@babel/plugin-syntax-jsx" "^7.2.0"
 
-"@emotion/babel-preset-css-prop@^10.0.5":
-  version "10.0.9"
-  resolved "https://registry.yarnpkg.com/@emotion/babel-preset-css-prop/-/babel-preset-css-prop-10.0.9.tgz#70386bd88fe4d8896e1b9729364daf3a6051f726"
-  integrity sha512-fETOWFEe734RlJZTuq6+NeHTzl+Kge4yRm3yrQC+Y2I+KxZjYiU5XUPdbylr0EATbkSzFXgVGKppciZfA5j1mw==
+"@emotion/babel-preset-css-prop@^10.0.17":
+  version "10.0.17"
+  resolved "https://registry.yarnpkg.com/@emotion/babel-preset-css-prop/-/babel-preset-css-prop-10.0.17.tgz#8ec9b6abe5f95c7dfb455e71810c2d3a12929245"
+  integrity sha512-vlgk87XKLlko7CTFOn8Iz1zkKWJjyPXXJRg6yI+GnvhxuSjurjctx+Z/bAKgQgXOdDNs0cmU90A3kOemq5XtzA==
   dependencies:
-    "@babel/plugin-transform-react-jsx" "^7.1.6"
-    "@emotion/babel-plugin-jsx-pragmatic" "^0.1.2"
-    babel-plugin-emotion "^10.0.9"
-    object-assign "^4.1.1"
+    "@babel/plugin-transform-react-jsx" "^7.3.0"
+    "@babel/runtime" "^7.5.5"
+    "@emotion/babel-plugin-jsx-pragmatic" "^0.1.3"
+    babel-plugin-emotion "^10.0.17"
 
 "@emotion/cache@^10.0.15":
   version "10.0.15"
@@ -821,27 +821,38 @@
     "@emotion/utils" "0.11.2"
     babel-plugin-emotion "^10.0.14"
 
-"@emotion/hash@0.7.1":
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/@emotion/hash/-/hash-0.7.1.tgz#9833722341379fb7d67f06a4b00ab3c37913da53"
-  integrity sha512-OYpa/Sg+2GDX+jibUfpZVn1YqSVRpYmTLF2eyAfrFTIJSbwyIrc+YscayoykvaOME/wV4BV0Sa0yqdMrgse6mA==
-
 "@emotion/hash@0.7.2":
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/@emotion/hash/-/hash-0.7.2.tgz#53211e564604beb9befa7a4400ebf8147473eeef"
   integrity sha512-RMtr1i6E8MXaBWwhXL3yeOU8JXRnz8GNxHvaUfVvwxokvayUY0zoBeWbKw1S9XkufmGEEdQd228pSZXFkAln8Q==
 
-"@emotion/memoize@0.7.1":
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.7.1.tgz#e93c13942592cf5ef01aa8297444dc192beee52f"
-  integrity sha512-Qv4LTqO11jepd5Qmlp3M1YEjBumoTHcHFdgPTQ+sFlIL5myi/7xu/POwP7IRu6odBdmLXdtIs1D6TuW6kbwbbg==
+"@emotion/hash@0.7.3":
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/@emotion/hash/-/hash-0.7.3.tgz#a166882c81c0c6040975dd30df24fae8549bd96f"
+  integrity sha512-14ZVlsB9akwvydAdaEnVnvqu6J2P6ySv39hYyl/aoB6w/V+bXX0tay8cF6paqbgZsN2n5Xh15uF4pE+GvE+itw==
 
 "@emotion/memoize@0.7.2":
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.7.2.tgz#7f4c71b7654068dfcccad29553520f984cc66b30"
   integrity sha512-hnHhwQzvPCW1QjBWFyBtsETdllOM92BfrKWbUTmh9aeOlcVOiXvlPsK4104xH8NsaKfg86PTFsWkueQeUfMA/w==
 
-"@emotion/serialize@^0.11.6", "@emotion/serialize@^0.11.8", "@emotion/serialize@^0.11.9":
+"@emotion/memoize@0.7.3":
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.7.3.tgz#5b6b1c11d6a6dddf1f2fc996f74cf3b219644d78"
+  integrity sha512-2Md9mH6mvo+ygq1trTeVp2uzAKwE2P7In0cRpD/M9Q70aH8L+rxMLbb3JCN2JoSWsV2O+DdFjfbbXoMoLBczow==
+
+"@emotion/serialize@^0.11.11":
+  version "0.11.11"
+  resolved "https://registry.yarnpkg.com/@emotion/serialize/-/serialize-0.11.11.tgz#c92a5e5b358070a7242d10508143306524e842a4"
+  integrity sha512-YG8wdCqoWtuoMxhHZCTA+egL0RSGdHEc+YCsmiSBPBEDNuVeMWtjEWtGrhUterSChxzwnWBXvzSxIFQI/3sHLw==
+  dependencies:
+    "@emotion/hash" "0.7.3"
+    "@emotion/memoize" "0.7.3"
+    "@emotion/unitless" "0.7.4"
+    "@emotion/utils" "0.11.2"
+    csstype "^2.5.7"
+
+"@emotion/serialize@^0.11.8", "@emotion/serialize@^0.11.9":
   version "0.11.9"
   resolved "https://registry.yarnpkg.com/@emotion/serialize/-/serialize-0.11.9.tgz#123e0f51d2dee9693fae1057bd7fc27b021d6868"
   integrity sha512-/Cn4V81z3ZyFiDQRw8nhGFaHkxHtmCSSBUit4vgTuLA1BqxfJUYiqSq97tq/vV8z9LfIoqs6a9v6QrUFWZpK7A==
@@ -1626,15 +1637,15 @@ babel-plugin-emotion@^10.0.14:
     find-root "^1.1.0"
     source-map "^0.5.7"
 
-babel-plugin-emotion@^10.0.9:
-  version "10.0.9"
-  resolved "https://registry.yarnpkg.com/babel-plugin-emotion/-/babel-plugin-emotion-10.0.9.tgz#04a0404d5a4084d5296357a393d344c0f8303ae4"
-  integrity sha512-IfWP12e9/wHtWHxVTzD692Nbcmrmcz2tip7acp6YUqtrP7slAyr5B+69hyZ8jd55GsyNSZwryNnmuDEVe0j+7w==
+babel-plugin-emotion@^10.0.17:
+  version "10.0.19"
+  resolved "https://registry.yarnpkg.com/babel-plugin-emotion/-/babel-plugin-emotion-10.0.19.tgz#67b9b213f7505c015f163a387a005c12c502b1de"
+  integrity sha512-1pJb5uKN/gx6bi3gGr588Krj49sxARI9KmxhtMUa+NRJb6lR3OfC51mh3NlWRsOqdjWlT4cSjnZpnFq5K3T5ZA==
   dependencies:
     "@babel/helper-module-imports" "^7.0.0"
-    "@emotion/hash" "0.7.1"
-    "@emotion/memoize" "0.7.1"
-    "@emotion/serialize" "^0.11.6"
+    "@emotion/hash" "0.7.3"
+    "@emotion/memoize" "0.7.3"
+    "@emotion/serialize" "^0.11.11"
     babel-plugin-macros "^2.0.0"
     babel-plugin-syntax-jsx "^6.18.0"
     convert-source-map "^1.5.0"
@@ -4369,13 +4380,13 @@ gatsby-page-utils@^0.0.5:
     micromatch "^3.1.10"
     slash "^1.0.0"
 
-gatsby-plugin-emotion@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-emotion/-/gatsby-plugin-emotion-4.1.0.tgz#475ec6eee3beab6be989d7e96c1d145ca3c9da7f"
-  integrity sha512-6Wrw47MK7j2OLgdjUmJVgdMtykFT9PNan2UTAjIWqquNMJgWWa96iM5kS4DnExhlwfyb50vji/SaWjW8JrUI8w==
+gatsby-plugin-emotion@^4.1.7:
+  version "4.1.7"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-emotion/-/gatsby-plugin-emotion-4.1.7.tgz#552ec1bb4f4ccb8b0585031fe8d7fb334e62bfe4"
+  integrity sha512-py48KP/pVj7NZInHkud21b/0TrAcGq7Y25VMkiFXJMpqpPHSSlYZHWYloTR/R4k88tZO2VHwPtmTPhHSeeJX3g==
   dependencies:
-    "@babel/runtime" "^7.0.0"
-    "@emotion/babel-preset-css-prop" "^10.0.5"
+    "@babel/runtime" "^7.6.0"
+    "@emotion/babel-preset-css-prop" "^10.0.17"
 
 gatsby-plugin-google-analytics@^2.1.1:
   version "2.1.1"
