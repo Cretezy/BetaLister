@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "142207457624-ph1klc9hjgsu6aifc5q2uc9p1q85kr2o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.betalister",
+            "certificate_hash": "8c8eaea31e6123f554c300adafac0627aebcbe8e"
+          }
+        },
+        {
           "client_id": "142207457624-v2ji9ba0ntvakgtrvilc1lmqea9qqr3g.apps.googleusercontent.com",
           "client_type": 3
         }

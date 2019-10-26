@@ -7,6 +7,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   analytics.logAppOpen();
 
   final prefs = await SharedPreferences.getInstance();

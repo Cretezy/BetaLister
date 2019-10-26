@@ -3,6 +3,10 @@
 - Upgraded dependency
 - Fix English translation string
 
+# v0.2.4 (7): 2019-10-26
+
+- Fix crash
+
 # v0.2.2 (5): 2019-06-16
 
 - Updated French translation
