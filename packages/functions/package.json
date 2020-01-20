@@ -14,7 +14,7 @@
     "start": "npm run shell"
   },
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.19.1",
     "dotenv": "^8.2.0",
     "entities": "^2.0.0",
     "firebase-admin": "^8.9.1",
