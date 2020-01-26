@@ -5,9 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n_delegate.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  FlutterError.onError = Crashlytics.instance.recordFlutterError;
+
   analytics.logAppOpen();
 
   final prefs = await SharedPreferences.getInstance();

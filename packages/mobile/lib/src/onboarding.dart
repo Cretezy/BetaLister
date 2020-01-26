@@ -2,9 +2,9 @@ import 'package:beta_lister/src/analytics.dart';
 import 'package:beta_lister/src/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intro_views_flutter/Models/page_view_model.dart';
 import 'package:intro_views_flutter/intro_views_flutter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Onboarding extends StatefulWidget {
   @override

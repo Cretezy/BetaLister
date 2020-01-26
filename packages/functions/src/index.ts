@@ -36,31 +36,35 @@ export const checkPackages = functions.https.onCall(
       .add({ packageNames, time: new Date() });
 
     const fetchPackagesPromises = packageNames.map(async packageName => {
-      if (packageName in packagesCache) {
-        response[packageName] = packagesCache[packageName];
-        return;
-      }
-
-      const packageRef = packagesRef.doc(packageName);
-      const packageInfo = await packageRef.get();
-
-      if (!packageInfo.exists) {
-        const data = await getPackageStatus(packageName);
-
-        if (data === null) {
-          response[packageName] = null;
+      try {
+        if (packageName in packagesCache) {
+          response[packageName] = packagesCache[packageName];
           return;
         }
 
-        await packageRef.set(data);
+        const packageRef = packagesRef.doc(packageName);
+        const packageInfo = await packageRef.get();
 
-        packagesCache[packageName] = data.beta;
-        response[packageName] = data.beta;
-      } else {
-        const { beta } = packageInfo.data();
+        if (!packageInfo.exists) {
+          const data = await getPackageStatus(packageName);
 
-        response[packageName] = beta;
-        packagesCache[packageName] = beta;
+          if (data === null) {
+            response[packageName] = null;
+            return;
+          }
+
+          await packageRef.set(data);
+
+          packagesCache[packageName] = data.beta;
+          response[packageName] = data.beta;
+        } else {
+          const { beta } = packageInfo.data();
+
+          response[packageName] = beta;
+          packagesCache[packageName] = beta;
+        }
+      } catch (error) {
+        console.error(`Error checking package ${packageName}`, error);
       }
     });
 
@@ -91,17 +95,18 @@ async function getPackageStatus(
     const results = await client.get(packageName);
     await entitiesPromise;
 
-    const beta = !results.data.includes("App not available");
-    const name = beta
-      ? entities.decodeHTML(results.data.match(/>App: (.*?)</)[1])
-      : null;
-    const owner = beta
-      ? entities.decodeHTML(results.data.match(/>Owner: (.*?)</)[1])
-      : null;
+    const nameMatch = results.data.match(/>App: (.*?)</);
+    const ownerMatch = results.data.match(/>Owner: (.*?)</);
 
-    const icon = beta
-      ? results.data.match(/img class="icon" src="(.*?)"/)[1]
-      : null;
+    const beta =
+      !results.data.includes("App not available") && nameMatch && ownerMatch;
+
+    const name = beta ? entities.decodeHTML(nameMatch[1]) : null;
+    const owner = beta ? entities.decodeHTML(ownerMatch[1]) : null;
+
+    const iconMatch = results.data.match(/img class="icon" src="(.*?)"/);
+
+    const icon = beta && iconMatch ? iconMatch[1] : null;
 
     return { beta, name, owner, icon };
   } catch (error) {

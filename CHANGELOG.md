@@ -1,3 +1,11 @@
+# v0.3.0 (8): 2020-01-26
+
+- Add Crashlytics
+
+# v0.2.4 (7): 2019-10-26
+
+- Rebuild
+
 # v0.2.3 (6): 2019-10-26
 
 - Upgraded dependency
