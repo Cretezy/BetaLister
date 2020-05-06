@@ -1,5 +1,6 @@
 import 'package:beta_lister/src/home.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 Future<void> launchUrl(String url) async {
@@ -34,8 +35,13 @@ Future<Map<String, AppStatus>> fetchPackages(List<String> packageNames) async {
     });
 
     return appStatues;
-  } catch (error) {
-    print("Error fetching packages: $error");
+  } catch (error, stackTrack) {
+    print("Error fetching packages: $error $stackTrack");
+    Crashlytics.instance.recordError(
+      error,
+      stackTrack,
+      context: "fetchPackages",
+    );
     return null;
   }
 }

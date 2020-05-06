@@ -45,7 +45,7 @@ export const checkPackages = functions.https.onCall(
         const packageRef = packagesRef.doc(packageName);
         const packageInfo = await packageRef.get();
 
-        if (!packageInfo.exists) {
+        if (!packageInfo.exists || !packageInfo.data().name) {
           const data = await getPackageStatus(packageName);
 
           if (data === null) {
@@ -60,8 +60,8 @@ export const checkPackages = functions.https.onCall(
         } else {
           const { beta } = packageInfo.data();
 
-          response[packageName] = beta;
-          packagesCache[packageName] = beta;
+          response[packageName] = !!beta;
+          packagesCache[packageName] = !!beta;
         }
       } catch (error) {
         console.error(`Error checking package ${packageName}`, error);
@@ -99,7 +99,7 @@ async function getPackageStatus(
     const ownerMatch = results.data.match(/>Owner: (.*?)</);
 
     const beta =
-      !results.data.includes("App not available") && nameMatch && ownerMatch;
+      !!(!results.data.includes("App not available") && nameMatch && ownerMatch);
 
     const name = beta ? entities.decodeHTML(nameMatch[1]) : null;
     const owner = beta ? entities.decodeHTML(ownerMatch[1]) : null;

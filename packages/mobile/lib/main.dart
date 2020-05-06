@@ -2,7 +2,7 @@ import 'package:beta_lister/src/analytics.dart';
 import 'package:beta_lister/src/home.dart';
 import 'package:beta_lister/src/onboarding.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_i18n/flutter_i18n_delegate.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -32,8 +32,9 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       localizationsDelegates: [
         FlutterI18nDelegate(
-          fallbackFile: "en",
-          path: "assets/i18n",
+          translationLoader: FileTranslationLoader(
+            basePath: "assets/i18n",
+          ),
         ),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
