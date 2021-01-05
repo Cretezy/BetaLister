@@ -13,7 +13,7 @@
     "start": "npm run shell"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "dotenv": "^8.2.0",
     "entities": "^2.0.0",
     "firebase-tools": "^7.12.1",
