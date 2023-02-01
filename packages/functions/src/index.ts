@@ -4,9 +4,10 @@ import "dotenv/config";
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 import axios from "axios";
+// import type { decodeHTML } from "entities"
 
-let entities;
-let entitiesPromise;
+let decodeHTML: typeof import("entities")["decodeHTML"];
+let decodeHTMLPromise: Promise<void>;
 
 admin.initializeApp();
 
@@ -14,14 +15,18 @@ const client = axios.create({
   baseURL: "https://play.google.com/apps/testing/",
   headers: { Cookie: process.env.COOKIE },
   responseType: "text",
-  maxContentLength: 999999
+  maxContentLength: 999999,
 });
 
 // In-memory cache
 const packagesCache = {};
 
-export const checkPackages = functions.https.onCall(
-  async ({ packageNames }) => {
+export const checkPackages = functions
+  .runWith({
+    timeoutSeconds: 120,
+    memory: "512MB",
+  })
+  .https.onCall(async ({ packageNames }) => {
     if (!Array.isArray(packageNames)) {
       return null;
     }
@@ -35,7 +40,7 @@ export const checkPackages = functions.https.onCall(
       .collection("requests")
       .add({ packageNames, time: new Date() });
 
-    const fetchPackagesPromises = packageNames.map(async packageName => {
+    const fetchPackagesPromises = packageNames.map(async (packageName) => {
       try {
         if (packageName in packagesCache) {
           response[packageName] = packagesCache[packageName];
@@ -72,8 +77,7 @@ export const checkPackages = functions.https.onCall(
     await addRequestPromise;
 
     return response;
-  }
-);
+  });
 
 interface PackageStatus {
   beta: boolean;
@@ -86,23 +90,26 @@ async function getPackageStatus(
   packageName: string
 ): Promise<PackageStatus | null> {
   try {
-    if (!entities && !entitiesPromise) {
-      entitiesPromise = (async () => {
-        entities = await import("entities");
+    if (!decodeHTML && !decodeHTMLPromise) {
+      decodeHTMLPromise = (async () => {
+        decodeHTML = (await import("entities")).decodeHTML;
       })();
     }
 
     const results = await client.get(packageName);
-    await entitiesPromise;
+    await decodeHTMLPromise;
 
     const nameMatch = results.data.match(/>App: (.*?)</);
     const ownerMatch = results.data.match(/>Owner: (.*?)</);
 
-    const beta =
-      !!(!results.data.includes("App not available") && nameMatch && ownerMatch);
+    const beta = !!(
+      !results.data.includes("App not available") &&
+      nameMatch &&
+      ownerMatch
+    );
 
-    const name = beta ? entities.decodeHTML(nameMatch[1]) : null;
-    const owner = beta ? entities.decodeHTML(ownerMatch[1]) : null;
+    const name = beta ? decodeHTML(nameMatch[1]) : null;
+    const owner = beta ? decodeHTML(ownerMatch[1]) : null;
 
     const iconMatch = results.data.match(/img class="icon" src="(.*?)"/);
 
